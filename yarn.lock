@@ -703,6 +703,11 @@
   resolved "https://registry.yarnpkg.com/@types/events/-/events-3.0.0.tgz#2862f3f58a9a7f7c3e78d79f130dd4d71c25c2a7"
   integrity sha512-EaObqwIvayI5a8dCzhFrjKzVwKLxjoG9T6Ppd5CEo07LRKfQ8Yokw54r5+Wq7FaBQ+yXRvQAYPrHwya1/UFt9g==
 
+"@types/geojson@*":
+  version "7946.0.6"
+  resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.6.tgz#416f388a06b227784a2d91a88a53f14de05cd54b"
+  integrity sha512-f6qai3iR62QuMPPdgyH+LyiXTL2n9Rf62UniJjV7KHrbiwzLTZUKsdq0mFSTxAHbO7JvwxwC4tH0m1UnweuLrA==
+
 "@types/glob@^7.1.1":
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/@types/glob/-/glob-7.1.1.tgz#aa59a1c6e3fbc421e07ccd31a944c30eba521575"
@@ -711,6 +716,13 @@
     "@types/events" "*"
     "@types/minimatch" "*"
     "@types/node" "*"
+
+"@types/leaflet@^1.4.3":
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/@types/leaflet/-/leaflet-1.4.3.tgz#62638cb73770eeaed40222042afbcc7b495f0cc4"
+  integrity sha512-jFRBSsPHi1EwQSwrN0cOJLdPhwOZsRl4IMxvm/2ShLh0YM5GfCtQXCzsrv8RE7DWL+AykXdYSAd9bFLWbZT4CQ==
+  dependencies:
+    "@types/geojson" "*"
 
 "@types/minimatch@*":
   version "3.0.3"
@@ -1458,6 +1470,11 @@ autoprefixer@^9.4.7:
     postcss "^7.0.14"
     postcss-value-parser "^3.3.1"
 
+av-ts@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/av-ts/-/av-ts-0.10.0.tgz#09572f630d93ee2201775f1a2b8e675190691867"
+  integrity sha512-fOkf+CQPcs3/Xu3efzqa/rsxEqlWJwEUS9xFBMYeNfEFoMm4WEXtk8JMFNszz9o9JxVEfFT6A1DEN/FUPF3/Uw==
+
 aws-sign2@~0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.7.0.tgz#b46e890934a9591f2d2f6f86d7e6a9f1b3fe76a8"
@@ -1706,6 +1723,13 @@ browserslist@^4.0.0, browserslist@^4.3.4, browserslist@^4.4.2:
     electron-to-chromium "^1.3.113"
     node-releases "^1.1.8"
 
+buefy@^0.7.3:
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/buefy/-/buefy-0.7.3.tgz#3008a20e624416e9d800d8775563afdb766e27d7"
+  integrity sha512-6PHKyDzU9BeExv9w5qcZJkjl9v73RWHeevWDRIZWD5TS4+dbmbzQ6z2EQc0sgbNHYesAgbX2Qd+xu5/KqDMFng==
+  dependencies:
+    bulma "0.7.4"
+
 buffer-from@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-1.1.1.tgz#32713bc028f75c02fdb710d7c7bcec1f2c6070ef"
@@ -1739,6 +1763,11 @@ builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
   integrity sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=
+
+bulma@0.7.4:
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.7.4.tgz#7e74512e9118d9799021339e67e365ee0ac4f3f9"
+  integrity sha512-krG2rP6eAX1WE0sf6O0SC/FUVSOBX4m1PBC2+GKLpb2pX0qanaDqcv9U2nu75egFrsHkI0zdWYuk/oGwoszVWg==
 
 bytes@3.0.0:
   version "3.0.0"
@@ -3793,6 +3822,11 @@ globby@^9.0.0:
     pify "^4.0.1"
     slash "^2.0.0"
 
+google-polyline@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/google-polyline/-/google-polyline-1.0.3.tgz#b1fafd8841059f7049d4ba6767c386be979510dc"
+  integrity sha512-36BnqVxmVcR8lTvzO6aeXdICNChAwQLlfMkR1P9IBpTWE8hA6bAbQHCVArwMHB5WIMq9owywtAkjioe3crNq4Q==
+
 graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6:
   version "4.1.15"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.15.tgz#ffb703e1066e8a0eeaa4c8b80ba9253eeefbfb00"
@@ -4736,6 +4770,11 @@ lcid@^2.0.0:
   integrity sha512-avPEb8P8EGnwXKClwsNUgryVjllcRqtMYa49NTsbQagYuT1DcXnl1915oxWjoyGrXR6zH/Y0Zc96xWsPcoDKeA==
   dependencies:
     invert-kv "^2.0.0"
+
+leaflet@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.4.0.tgz#d5f56eeb2aa32787c24011e8be4c77e362ae171b"
+  integrity sha512-x9j9tGY1+PDLN9pcWTx9/y6C5nezoTMB8BLK5jTakx+H7bPlnbCHfi9Hjg+Qt36sgDz/cb9lrSpNQXmk45Tvhw==
 
 levn@^0.3.0, levn@~0.3.0:
   version "0.3.0"
@@ -7812,11 +7851,6 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-vue-class-component@^6.0.0, vue-class-component@^6.2.0:
-  version "6.3.2"
-  resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-6.3.2.tgz#e6037e84d1df2af3bde4f455e50ca1b9eec02be6"
-  integrity sha512-cH208IoM+jgZyEf/g7mnFyofwPDJTM/QvBNhYMjqGB8fCsRyTf68rH2ISw/G20tJv+5mIThQ3upKwoL4jLTr1A==
-
 vue-eslint-parser@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-2.0.3.tgz#c268c96c6d94cfe3d938a5f7593959b0ca3360d1"
@@ -7857,13 +7891,6 @@ vue-loader@^15.6.2:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
-vue-property-decorator@^7.0.0:
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/vue-property-decorator/-/vue-property-decorator-7.3.0.tgz#d50d67f0b0f1c814f9f2fba36d6eeccbcc62dbb6"
-  integrity sha512-HarXfTQ/Nxm4s/APpAaGIGHq5ZzslApImQy8ZrtkfGamw8rUFAVgMS5C50/AQ80+wfw3Wpnf4bNzbmj75m/k2Q==
-  dependencies:
-    vue-class-component "^6.2.0"
-
 vue-style-loader@^4.1.0:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/vue-style-loader/-/vue-style-loader-4.1.2.tgz#dedf349806f25ceb4e64f3ad7c0a44fba735fcf8"
@@ -7884,6 +7911,11 @@ vue-template-es2015-compiler@^1.9.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
+
+vue2-leaflet@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/vue2-leaflet/-/vue2-leaflet-2.0.2.tgz#ba70e5c11db5ad5dccc82002bd4df7f0cde3f605"
+  integrity sha512-8KAU0mbUp5CDwb5NBlpEoyCO/x+Rv1KeA4599HJqpHeOrzY0+PBoUabM80riUUWJWGhRi3yhV4DJ8Kf1QHRelQ==
 
 vue@^2.6.6:
   version "2.6.8"

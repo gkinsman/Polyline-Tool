@@ -1,29 +1,35 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <Nav></Nav>
+    <section class="section">
+      <div class="container">
+        <div class="columns is-desktop">
+          <Map class="column the-map"></Map>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import HelloWorld from "./components/HelloWorld.vue";
+import Vue from "vue";
+import { Component, Lifecycle } from "av-ts";
+import { LMap, LPolyline } from "vue2-leaflet";
+import Map from "@/components/Map.vue";
+import Nav from "@/components/Nav.vue";
+import polyline from "google-polyline";
 
 @Component({
   components: {
-    HelloWorld
+    Nav,
+    Map
   }
 })
 export default class App extends Vue {}
 </script>
 
 <style lang="scss">
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.column.the-map {
+  height: 80vh;
 }
 </style>
