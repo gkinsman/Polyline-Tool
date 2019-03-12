@@ -15,15 +15,6 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faGreaterThan, faLessThan } from "@fortawesome/free-solid-svg-icons";
 
-import L from "leaflet";
-delete L.Icon.Default.prototype._getIconUrl;
-
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
-  iconUrl: require("leaflet/dist/images/marker-icon.png"),
-  shadowUrl: require("leaflet/dist/images/marker-shadow.png")
-});
-
 Vue.config.productionTip = false;
 
 library.add(faGreaterThan, faLessThan);

@@ -141,7 +141,7 @@ export default class Playback extends Vue {
   }
 
   entireRouteProcessed: [number, number][] = [];
-  rawRouteProcessed: [number, number][] = [];
+  rawRouteProcessed: any = [];
   processPercentage: number = 0;
   async processEntireRoute() {
     var existing = localStorage.getItem(`route-${this.loadedRouteId}`);
@@ -208,7 +208,7 @@ export default class Playback extends Vue {
 
   fixedLocation: [number, number] | null = null;
   sourceLocation: [number, number] = [0, 0];
-  lineTail: [number, number][] = [];
+  lineTail: any = [];
   matchConfidence: number | string | null = null;
 
   loadingMatch: boolean = false;
@@ -232,10 +232,7 @@ export default class Playback extends Vue {
 
     var decodedFixedLine: [number, number][] = polyline.decode(match.polyline);
     this.fixedLocation = decodedFixedLine[decodedFixedLine.length - 1];
-    this.lineTail = tail.map<[number, number][]>(t => [
-      t.latitude,
-      t.longitude
-    ]);
+    this.lineTail = tail.map(t => [t.latitude, t.longitude]);
     this.matchConfidence = match.confidence;
 
     this.loadingMatch = false;

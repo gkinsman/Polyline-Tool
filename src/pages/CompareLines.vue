@@ -88,13 +88,6 @@ export default class CompareLines extends Vue {
     this.updateUrl();
   }
 
-  setBounds() {
-    if (this.fromLine && this.toLine) {
-      var bounds = new L.LatLngBounds(this.fromLine!.latlngs);
-      this.$refs.map.setBounds(bounds);
-    }
-  }
-
   @Lifecycle
   mounted() {
     this.loadFromQueryString();
