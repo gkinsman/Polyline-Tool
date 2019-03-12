@@ -7,21 +7,14 @@
       <b-field class="column" label="Fixed Polyline">
         <b-input v-model="toLineString"></b-input>
       </b-field>
-      <b-field class="column">
-        <div class="control">
-          <button @click="updateLines" class="button">View On Map</button>
-        </div>
+      <b-field label="Go" class="column is-narrow">
+        <button @click="updateLines" class="button">View On Map</button>
       </b-field>
     </div>
+
     <l-map ref="map" style="height:100%; width:100%;">
       <l-tilelayer :url="tileLayer"></l-tilelayer>
-      <l-polyline
-        ref="fromLine"
-        v-if="fromLine"
-        :lat-lngs="fromLine.latlngs"
-        :color="fromLine.color"
-      ></l-polyline>
-      <l-polyline ref="toLine" v-if="toLine" :lat-lngs="toLine.latlngs" :color="toLine.color"></l-polyline>
+      <l-polyline v-for="line in lines" :key="line.idx" :lat-lngs="line.latlngs" :color="'green'"></l-polyline>
     </l-map>
   </div>
 </template>
@@ -41,7 +34,7 @@ interface Line {
 }
 
 @Component
-export default class Map extends Vue {
+export default class CompareLines extends Vue {
   $refs!: {
     map: LMap;
     fromLine: LPolyline;
@@ -54,9 +47,6 @@ export default class Map extends Vue {
 
   fromLineString: string = "";
   toLineString: string = "";
-
-  fromLine: Line | null = null;
-  toLine: Line | null = null;
 
   loadFromQueryString() {
     var params = new URLSearchParams(window.location.search);
@@ -77,19 +67,24 @@ export default class Map extends Vue {
     );
   }
 
+  lines: { latlngs: [number, number][]; idx: number }[] = [];
   updateLines() {
-    if (this.fromLineString)
-      this.fromLine = {
-        latlngs: polyline.decode(this.fromLineString),
-        color: "red"
-      };
-    if (this.toLineString)
-      this.toLine = {
-        latlngs: polyline.decode(this.toLineString),
-        color: "green"
-      };
+    if (!this.fromLineString || !this.toLineString)
+      throw Error("Must provide both source and fixed line stings");
 
-    this.setBounds();
+    let fromLine: [number, number][] = polyline.decode(this.fromLineString);
+    let toLine: [number, number][] = polyline.decode(this.toLineString);
+
+    this.lines = fromLine
+      .map((fromPoint: [number, number], idx: number) => {
+        var toPoint = toLine[idx - 1];
+        return { latlngs: [fromPoint, toPoint], idx: idx };
+      })
+      .filter(l => !!l.latlngs[0] && !!l.latlngs[1]);
+
+    var bounds = L.latLngBounds(this.lines.map(l => L.latLng(l.latlngs[0])));
+    this.$refs.map.setBounds(bounds);
+    //this.setBounds();
     this.updateUrl();
   }
 
@@ -110,6 +105,8 @@ export default class Map extends Vue {
 
 <style lang="scss" scoped>
 .app-map {
+  height: 70vh;
+
   .map {
     height: 80%;
     width: 100%;
