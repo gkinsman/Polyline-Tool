@@ -41,7 +41,7 @@ export default class CompareManyLines extends Vue {
   lineInput: string = "";
 
   get tileLayer() {
-    return "http://{s}.tile.osm.org/{z}/{x}/{y}.png";
+    return "https://tile.thunderforest.com/neighbourhood/{z}/{x}/{y}.png?apikey=9cbad82c6c9247579920818469285267";
   }
 
   currentId = 0;

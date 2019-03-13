@@ -152,10 +152,6 @@ export default class Playback extends Vue {
         r.longitude
       ]);
       this.processPercentage = 100;
-      localStorage.setItem(
-        `route-raw-${this.loadedRouteId}`,
-        polyline.encode(this.rawRouteProcessed)
-      );
       return;
     }
 
@@ -172,7 +168,7 @@ export default class Playback extends Vue {
       polyline.encode(this.entireRouteProcessed)
     );
     localStorage.setItem(
-      `route-raw-${this.loadedRouteId}`,
+      `raw-route-${this.loadedRouteId}`,
       polyline.encode(this.rawRouteProcessed)
     );
   }
