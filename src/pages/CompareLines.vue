@@ -105,7 +105,7 @@ export default class CompareLines extends Vue {
 
     this.lines = fromLine
       .map((fromPoint: [number, number], idx: number) => {
-        var toPoint = toLine[Math.max(0, idx - 1)];
+        var toPoint = toLine[idx];
         var distance = haversine(fromPoint, toPoint, {
           format: "[lat,lon]",
           unit: "meter"

@@ -6,6 +6,7 @@
     <div class="navbar-menu">
       <div class="navbar-start">
         <router-link class="navbar-item" to="/">Compare</router-link>
+        <router-link class="navbar-item" to="/view-points">View Points</router-link>
         <router-link class="navbar-item" to="/compare-many">Compare Many</router-link>
         <router-link class="navbar-item" to="/playback">Playback</router-link>
       </div>
