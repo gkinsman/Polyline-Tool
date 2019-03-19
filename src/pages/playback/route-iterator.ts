@@ -1,6 +1,6 @@
 import MatchService from "@/api/MatchService";
 import { ApiLocation } from "@/api/RouteService";
-import polyline from "google-polyline";
+import { decode } from "@/utils";
 
 const client = new MatchService();
 
@@ -29,7 +29,7 @@ export default async function* iterateRoute(
 
     try {
       const response = await client.loadMatch(tail, 30);
-      let decodedPolyline = polyline.decode(response.polyline);
+      let decodedPolyline = decode(response.polyline);
       lastResponse = decodedPolyline[decodedPolyline.length - 1];
       yield {
         matchedPoint: lastResponse,

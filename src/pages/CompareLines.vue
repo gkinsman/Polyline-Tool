@@ -41,12 +41,12 @@
 <script lang="ts">
 import Vue from "vue";
 import { LMap, LPolyline, LPolygon, LFeatureGroup } from "vue2-leaflet";
-import polyline from "google-polyline";
 import "leaflet/dist/leaflet.css";
 import { Component, Lifecycle } from "av-ts";
 import L from "leaflet";
 import haversine from "haversine";
 import math from "mathjs";
+import { decode } from "@/utils";
 
 interface Line {
   latlngs: [number, number][];
@@ -100,8 +100,8 @@ export default class CompareLines extends Vue {
   updateLines() {
     if (!this.fromLineString || !this.toLineString) return;
 
-    let fromLine: [number, number][] = polyline.decode(this.fromLineString);
-    let toLine: [number, number][] = polyline.decode(this.toLineString);
+    let fromLine: [number, number][] = decode(this.fromLineString);
+    let toLine: [number, number][] = decode(this.toLineString);
 
     this.lines = fromLine
       .map((fromPoint: [number, number], idx: number) => {

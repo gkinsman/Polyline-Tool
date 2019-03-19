@@ -5,7 +5,8 @@ import {
   LTileLayer,
   LPolyline,
   LMarker,
-  LCircleMarker
+  LCircleMarker,
+  LFeatureGroup
 } from "vue2-leaflet";
 import Buefy from "buefy";
 import "buefy/dist/buefy.css";
@@ -36,6 +37,7 @@ Vue.component("l-tilelayer", LTileLayer);
 Vue.component("l-polyline", LPolyline);
 Vue.component("l-marker", LMarker);
 Vue.component("l-circle-marker", LCircleMarker);
+Vue.component("l-feature-group", LFeatureGroup);
 
 new Vue({
   router,

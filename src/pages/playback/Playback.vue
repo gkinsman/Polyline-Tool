@@ -93,10 +93,10 @@ import Vue from "vue";
 import { Component, Lifecycle } from "av-ts";
 import RouteService, { ApiLocation } from "@/api/RouteService";
 import MatchService, { MatchResult } from "@/api/MatchService";
-import polyline from "google-polyline";
 import { LMap } from "vue2-leaflet";
 import L from "leaflet";
 import iterateRoute from "./route-iterator";
+import { encode, decode } from "@/utils";
 
 @Component
 export default class Playback extends Vue {
@@ -146,7 +146,7 @@ export default class Playback extends Vue {
   async processEntireRoute() {
     var existing = localStorage.getItem(`route-${this.loadedRouteId}`);
     if (existing) {
-      this.entireRouteProcessed = polyline.decode(existing);
+      this.entireRouteProcessed = decode(existing);
       this.rawRouteProcessed = this.loadedRoute.map(r => [
         r.latitude,
         r.longitude
@@ -160,16 +160,20 @@ export default class Playback extends Vue {
       this.entireRouteProcessed.push(item.matchedPoint);
       this.processPercentage = item.progress;
       let rawPoint = this.loadedRoute[item.index];
-      this.rawRouteProcessed.push([rawPoint.latitude, rawPoint.longitude]);
     }
 
     localStorage.setItem(
       `route-${this.loadedRouteId}`,
-      polyline.encode(this.entireRouteProcessed)
+      encode(this.entireRouteProcessed)
     );
     localStorage.setItem(
       `raw-route-${this.loadedRouteId}`,
-      polyline.encode(this.rawRouteProcessed)
+      encode(
+        this.loadedRoute.map(p => {
+          var loc: [number, number] = [p.latitude, p.longitude];
+          return loc;
+        })
+      )
     );
   }
 
@@ -226,7 +230,7 @@ export default class Playback extends Vue {
     var srcPoint = this.loadedRoute[this.currentInputPointIndex];
     this.sourceLocation = [srcPoint.latitude, srcPoint.longitude];
 
-    var decodedFixedLine: [number, number][] = polyline.decode(match.polyline);
+    var decodedFixedLine: [number, number][] = decode(match.polyline);
     this.fixedLocation = decodedFixedLine[decodedFixedLine.length - 1];
     this.lineTail = tail.map(t => [t.latitude, t.longitude]);
     this.matchConfidence = match.confidence;

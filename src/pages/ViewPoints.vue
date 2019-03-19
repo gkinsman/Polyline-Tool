@@ -25,10 +25,10 @@
 <script lang="ts">
 import Vue from "vue";
 import { LMap, LPolyline, LPolygon, LFeatureGroup } from "vue2-leaflet";
-import polyline from "google-polyline";
 import "leaflet/dist/leaflet.css";
 import { Component, Lifecycle } from "av-ts";
 import L from "leaflet";
+import { decode } from "@/utils";
 
 interface Point {
   latlng: [number, number];
@@ -50,7 +50,7 @@ export default class ViewPoints extends Vue {
 
   currentId = 0;
   updateLines() {
-    let points: [number, number][] = polyline.decode(this.lineInput);
+    let points: [number, number][] = decode(this.lineInput);
 
     this.points = points.map<Point>(point => ({
       latlng: [point[0], point[1]],

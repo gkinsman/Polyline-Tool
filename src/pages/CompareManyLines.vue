@@ -12,6 +12,13 @@
     <l-map ref="map" style="height:100%; width:100%;">
       <l-tilelayer :url="tileLayer"></l-tilelayer>
       <l-polyline v-for="line in lines" :lat-lngs="line.latlngs" :color="line.color" :key="line.id"></l-polyline>
+      <l-feature-group v-for="pointCloud in points" :key="pointCloud.id">
+        <l-marker
+          v-for="point in pointCloud.latlngs"
+          :lat-lng="point"
+          :key="`${point[0]}|${point[1]}`"
+        ></l-marker>
+      </l-feature-group>
     </l-map>
   </div>
 </template>
@@ -20,15 +27,23 @@
 <script lang="ts">
 import Vue from "vue";
 import { LMap, LPolyline, LPolygon, LFeatureGroup } from "vue2-leaflet";
-import polyline from "google-polyline";
 import "leaflet/dist/leaflet.css";
 import { Component, Lifecycle } from "av-ts";
 import L from "leaflet";
+import { decode } from "@/utils";
 
-interface Line {
+type PointOrLine = "Point" | "Line";
+
+interface Mappable {
   latlngs: [number, number][];
   color: string;
   id: number;
+  type: PointOrLine;
+}
+
+interface StyleInfo {
+  color: string;
+  type: PointOrLine;
 }
 
 @Component
@@ -37,24 +52,67 @@ export default class CompareManyLines extends Vue {
     map: LMap;
   };
 
-  lines: Line[] = [];
+  lines: Mappable[] = [];
+  points: Mappable[] = [];
+
   lineInput: string = "";
 
   get tileLayer() {
     return "https://tile.thunderforest.com/neighbourhood/{z}/{x}/{y}.png?apikey=9cbad82c6c9247579920818469285267";
   }
 
+  // (blue) makes the line blue
+  // [P] makes it a point cloud, [L] makes it a line
+  extractStyleCommand(line: string): [StyleInfo, string] {
+    if (line.startsWith("(") && line.indexOf(")") < 10) {
+      var color = line.substring(1, line.indexOf(")"));
+      return [
+        {
+          color: color,
+          type: "Line"
+        },
+        line.substring(line.indexOf(")") + 1)
+      ];
+    }
+    if (line.startsWith("[") && line.indexOf("]") == 2) {
+      return [
+        {
+          color: "blue",
+          type: line.substring(1, 2) == "P" ? "Point" : "Line"
+        },
+        line.substring(3)
+      ];
+    }
+
+    // defaults
+    return [
+      {
+        color: "green",
+        type: "Line"
+      },
+      line
+    ];
+  }
+
   currentId = 0;
   updateLines() {
     var split = this.lineInput.split(/\r?\n/);
 
-    this.lines = split
-      .map(line => polyline.decode(line))
-      .map<Line>(line => ({
-        latlngs: line,
-        color: "green",
-        id: this.currentId++
+    const parsed = split
+      .map<[StyleInfo, string]>(line => {
+        let extract = this.extractStyleCommand(line);
+        return [extract[0], extract[1]];
+      })
+      .map<[StyleInfo, [number, number][]]>(line => [line[0], decode(line[1])])
+      .map<Mappable>(line => ({
+        latlngs: line[1],
+        color: line[0].color,
+        id: this.currentId++,
+        type: line[0].type
       }));
+
+    this.lines = parsed.filter(p => p.type == "Line");
+    this.points = parsed.filter(p => p.type == "Point");
 
     this.setBounds();
   }
